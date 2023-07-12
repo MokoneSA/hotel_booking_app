@@ -4,29 +4,22 @@ import React, { useState, useEffect } from 'react';
 import NewRoomNavbar from '../../components/navbar/NewRoomNavbar';
 import HeroSec from '../../components/HeroSec';
 import Footer from '../../components/Footer';
+import ViewModal from '../../components/modal/ViewModal';
 
 // Firebase import
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../config/firebase';
-import { 
-    getDocs, 
-    collection,
-    deleteDoc,
-    doc 
-} from 'firebase/firestore';
-
-import ViewModal from '../../components/modal/ViewModal';
-
+import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
 
 
 const ViewRooms = () => {
 
     const [rooms, setRooms] = useState();
+    const [selectedRoom, setSelectedRoom] = useState();
     const [openViewModal, setViewModal] = useState(false)
 
-
-    const viewModal = () => {
-        setViewModal(true);
+    const closeEdit = () => {
+        setViewModal(false);
     }
 
     const logout = async () => {
@@ -45,6 +38,16 @@ const ViewRooms = () => {
         setRooms(rooms);
     }
 
+
+
+    const handleEdit = id => {
+        const [room] = rooms.filter(room => room.id === id);
+        console.log(room);
+        setSelectedRoom(room);
+        setViewModal(true);
+      };
+
+
     // handles deleting a room
     const handleDelete = async (id) => {
         const hotelRooms = doc(db, "hotelRooms", id);
@@ -59,16 +62,16 @@ const ViewRooms = () => {
 
     return (
         <>
-            {openViewModal && <ViewModal />}
+            {openViewModal && <ViewModal selectedRoom={selectedRoom} closeEdit={closeEdit} />}
             <div className="flex flex-col justify-center items-center m-0">
                 <header>
                     <NewRoomNavbar signOut={logout} />
                     <HeroSec />
                 </header>
-                <main className="m-0 w-[1024px] flex flex-row items-center justify-center">
-                    <table className="striped-table my-4 mx-8 w-[900px] border">
+                <main className="m-0 w-[1024px] flex flex-row justify-center h-[400px]">
+                    <table className="striped-table my-4 mx-8 w-[1024px] border h-[200px]">
                         <thead>
-                            <tr className="border-b-2 border-sky-600 text-left ">
+                            <tr className="border-b-2 border-t-2 border-sky-600 text-left ">
                                 <th className="border">Hotel</th>
                                 <th className="border">Title</th>
                                 <th className="border">Descrip</th>
@@ -94,7 +97,7 @@ const ViewRooms = () => {
                                         <td className="border">{room.roomType} </td>
                                         <td className="text-right">
                                             <button
-                                                // onClick={() => handleEdit(room.id)}
+                                                onClick={() => {handleEdit(room.id)}}
                                                 className="button muted-button mr-2"
                                             >Edit</button>
                                         </td>

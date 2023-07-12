@@ -14,6 +14,7 @@ const LoginModal = ({ closeLogin }) => {
 
     const navigate = useNavigate();
 
+    // handles login function
     const handleLogin = ((e) => {
         e.preventDefault()
         signInWithEmailAndPassword(auth, email, password).then(() => {
