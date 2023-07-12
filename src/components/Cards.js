@@ -5,7 +5,6 @@ import { db } from '../config/firebase'; // importing database from config file
 import { collection, getDocs } from 'firebase/firestore'; // Firebase functions
 import { faBed, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FaStar } from 'react-icons/fa';
 
 
 
@@ -63,10 +62,10 @@ export const Cards = () => {
                         </div>
                         
                         <div className=" ml-20 mr-20 mt-4 flex justify-evenly ">
-                            <button className="text-orange-500 ">
+                            <button className="text-sky-600 ">
                                  View more
                             </button>
-                            <button className=" text-orange-500">
+                            <button className=" text-sky-600">
                                 Add
                             </button>
                         </div>

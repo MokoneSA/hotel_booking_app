@@ -12,7 +12,7 @@ const Navbar = ({signOut}) => {
             <div className='navContainer'>
                 <span className='logo'>HOTEL <FontAwesomeIcon icon={faBellConcierge} /> BOOKINGS</span>
                 <nav className="navItems">
-                    <Link to="/">Home</Link>
+                    <Link to="/newroom">New Room</Link>
                     <Link to="/" className="logout-link" onClick={signOut}>Log out</Link>
                 </nav>
             </div>

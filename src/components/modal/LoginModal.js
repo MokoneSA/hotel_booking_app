@@ -1,13 +1,23 @@
 import React from 'react'
 import '../../components/modal/stryle.css'
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+// import useAuth from '../../hooks/useAuth';
 
 // Initializing firebase authentication
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 
 const LoginModal = ({ closeLogin }) => {
+
+    // const { setAuth } = useAuth();
+    // const userRef = useRef();
+    // const errRef = useRef();
+
+
+    // useEffect(() => {
+    //     useRef.current.focus();
+    // }, [])
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

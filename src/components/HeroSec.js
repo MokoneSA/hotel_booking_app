@@ -1,15 +1,14 @@
 import React from 'react';
-import '../styles/header.css';
 import heropic from '../images/hero-pic.jpg'
 
 
 
 const Header = () => {
     return (
-        <div className="hero-section">
-            <div className="hr-rule bg-sky-800 "></div>
-            <div className="img-div">
-                <img src={heropic} alt='banner' className="hero-image" />
+        <div className=" flex flex-col justify-center items-center ">
+            <div className=" bg-sky-800 w-[1024px] h-[4px] "></div>
+            <div className="w-[1024px] flex flex-col justify-center items-center">
+                <img src={heropic} alt='banner' className="h-[350px] w-full" />
             </div>
         </div>
     )

@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { db, storage } from '../../config/firebase'
-import { collection, addDoc, getDocs, deleteDoc, doc, setDoc } from 'firebase/firestore';
-import { ref } from 'firebase/storage'
+import { db } from '../../config/firebase'
+import { collection, getDoc, doc, updateDoc} from 'firebase/firestore';
 
 
 
 const ViewModal = ({ closeEdit, selectedRoom }) => {
 
     const [imageUpload, setImageUpload] = useState();
-    const [hotel,setHotel] = useState(selectedRoom.hotel);
+    const [hotel, setHotel] = useState(selectedRoom.hotel);
     const [title, setTitle] = useState(selectedRoom.title);
     const [description, setDescription] = useState(selectedRoom.description);
     const [address, setAddress] = useState(selectedRoom.address);
@@ -24,9 +23,11 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
     // View and delete room section
     const [rooms, setRooms] = useState([]);
 
+    // const hotelRoomRef = doc(db, "hotelRooms");
+
     const getRooms = async () => {
         try {
-            const data = await getDocs(collection(db, "hotelRooms"));
+            const data = await getDoc(collection(db, "hotelRooms"));
 
             const filteredData = data.docs.map((doc) => ({
                 ...doc.data(), id: doc.id,
@@ -54,23 +55,18 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
             roomType,
             bedType,
             imageUrl
-        };
+        }
 
-        // Add a new document in collection "cities"
-        await setDoc(doc(db, "hotelRooms"), {
+        // Add a new document in collection
+        await updateDoc(doc(db, "hotelRooms"), {
             ...room
         });
 
-        setRooms(room);
 
+        // await updateDoc(hotelRoomRef, {
+        //     ...room
+        // })
     }
-
-    // delete room function
-    const deleteRoom = async (id) => {
-        const hotelRooms = doc(db, "hotelRooms", id);
-        await deleteDoc(hotelRooms);
-    }
-
 
     useEffect(() => {
         getRooms();
@@ -171,7 +167,6 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
                         </div>
                         <div className="flex flex-row justify-evenly items-start w-[450px] ">
                             <button className=" font-bold rounded-md bg-sky-950 w-[100px] mx-0 my-10" onClick={updateRoom}>Update</button>
-                            <button className=" font-bold rounded-md bg-sky-950 w-[100px] mx-0 my-10" onClick={deleteRoom}>Delete</button>
                             <button className=" font-bold rounded-md bg-sky-950 w-[100px] mx-0 my-10" onClick={closeEdit}>Close</button>
                         </div>
                     </form>
