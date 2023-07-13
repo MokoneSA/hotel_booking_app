@@ -55,7 +55,7 @@ const ViewRooms = () => {
 
     useEffect(() => {
         getRooms()
-    }, []);
+    }, [rooms]);
 
 
 

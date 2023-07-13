@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Navbar = ({signOut}) => {
 
     return (
-        <div className="navbar">
+        <div className="navbar bg-slate-200">
             <div className='navContainer'>
                 <span className='logo'>HOTEL <FontAwesomeIcon icon={faBellConcierge} /> BOOKINGS</span>
                 <nav className="navItems">

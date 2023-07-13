@@ -61,22 +61,24 @@ export const AdminHome = () => {
         const uploadImage = () => {
             const imageRef = ref(storage, `hotelImages/${imageUpload.name + v4()}`);
             uploadBytes(imageRef, imageUpload).then(() => {
+                getDownloadURL(imageRef).then((url) => {
+                setImageUrl(url);
                 alert("Image Uploaded");
-            })
+            })})
         }
         uploadImage();
     })
 
 
-    useEffect(() => {
-        list(imageListRef).then((response) => {
-            response.items.forEach((item) => {
-                getDownloadURL(item).then((url) => {
-                    setImageUrl((prev) => [...prev, url]);
-                })
-            })
-        })
-    }, [])
+    // useEffect(() => {
+    //     list(imageListRef).then((response) => {
+    //         response.items.forEach((item) => {
+    //             getDownloadURL(item).then((url) => {
+    //                 setImageUrl((prev) => [...prev, url]);
+    //             })
+    //         })
+    //     })
+    // }, [])
 
     return (
         <div className='home-container h-screen'>
@@ -86,7 +88,7 @@ export const AdminHome = () => {
                 <h3 className="font-black text-2xl m-[30px]">Add New Room</h3>
                 <form className="flex flex-row justify-center" >
                     <div className="left-side w-[450px] flex flex-col">
-                        <img className="image" src={imageUpload} alt="" />
+                        <img className="image" src={imageUrl} alt="" />
                         <input className="my-0" type="file" onChange={(e) => setImageUpload(e.target.files[0])} />
                         <label className="text-base font-medium mx-0 my-2 mr-[30px]">Hotel</label>
                         <input

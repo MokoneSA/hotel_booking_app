@@ -1,12 +1,12 @@
 import React from 'react';
 import '../../styles/home.css'
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 // Components import
-import ClientNavbar from '../../components/ClientNavbar';
+import ClientNavbar from '../../components/navbar/ClientNavbar';
 import Header from '../../components/HeroSec';
 import Footer from '../../components/Footer';
-import Cards from '../../components/Cards';
+import Cards from '../../components/cards/Cards';
 
 // Images
 import fimage1 from '../../images/home-images/Feat-room1.jpg'
@@ -24,7 +24,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const Home = () => {
 
-  const nagivate = useNavigate();
+  // const nagivate = useNavigate();
 
 
   const logout = async () => {
@@ -47,7 +47,7 @@ export const Home = () => {
       <main className="main bg-white flex flex-col w-[1024px] m-auto ">
         <div className="flex flex-col justify-center items-center h-[350px]">
           <div className="heading flex justify-center">
-            <h2 className=" text-xl font-bold mt-2  mb-8">Featured Rooms</h2>
+            <h2 className=" text-xl font-bold mt-2  mb-8" text-sky-600>Featured Rooms</h2>
           </div>
           <div className="flex flex-row justify-evenly items-center">
             <div className="h-[230px] w-[300px] bg-sky-800  rounded-md ">
@@ -77,14 +77,14 @@ export const Home = () => {
               </iframe><a href="https://embed-googlemap.com" className='border-none'></a>
             </div>
           </div>
-          <div className="card-list flex flex-col justify-start mx-5 my-3">
+          <div className="card-list flex flex-col justify-start ml-5 my-3">
             <ul className="card flex flex-col justify-between">
               <li><Cards /></li>
               <li></li>
             </ul>
           </div>
         </div>
-        <div className="services-section flex flex-col h-[300px] w-[1024px] bg-slate-600">
+        <div className="services-section flex flex-col h-[300px] w-[1024px] bg-slate-200">
           <div className="heading my-8 flex justify-center items-center">
             <h5 className="text-xl font-bold text-sky-600">Services</h5>
           </div>

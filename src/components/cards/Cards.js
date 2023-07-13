@@ -1,7 +1,7 @@
 import React from 'react';
-import '../styles/card.css'; // Importing css style
+import '../../styles/card.css'; // Importing css style
 import { useState, useEffect } from 'react'; // React Hooks
-import { db } from '../config/firebase'; // importing database from config file
+import { db } from '../../config/firebase'; // importing database from config file
 import { collection, getDocs } from 'firebase/firestore'; // Firebase functions
 import { faBed, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,7 +37,7 @@ export const Cards = () => {
     return (
         <>
             {rooms.map((room,id) => (
-                <div className="card-item flex flex-row justify-center my-2" key={id}>
+                <div className="card-item flex flex-row justify-center my-2 border border-gray-300" key={id}>
                     <div className="image-container">
                         <img src={room.roomImage} alt='roomImage' />
                     </div>

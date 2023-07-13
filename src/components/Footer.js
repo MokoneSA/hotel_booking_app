@@ -4,7 +4,7 @@ import '../styles/footer.css';
 export const Footer = () => {
     return (
         <footer>
-            <div className='sb_footer section_padding'>
+            <div className='sb_footer section_padding bg-gray-300'>
                 <div className='sb_footer-links'>
                     <div className='sb_footer-links-div'>
                         <h4 className="text-lg font-medium">For Business</h4>
@@ -43,7 +43,7 @@ export const Footer = () => {
                         <a href='#'><div><p>Security</p></div></a>
                     </div>
                 </div>
-                <div className=" bg-sky-800 h-[5px] w-[1024px] "></div>
+                <div className=" bg-black h-[5px] w-[1024px] "></div>
             </div>
         </footer>
     )

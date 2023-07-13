@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Header from '../components/HeroSec';
 import Footer from '../components/Footer';
-import Cards from '../components/Cards';
+import Cards from '../components/cards/Cards';
 import LoginModal from '../components/modal/LoginModal';
 import RegistModal from '../components/modal/RegistModal';
 
@@ -54,10 +54,10 @@ export const Home = () => {
       <div className='hero-section'>
         <Header />
       </div>
-      <div className="main flex flex-col justify-center items-center">
+      <div className="main flex flex-col justify-center items-center w-[1024px] m-auto">
         <div className="flex flex-col justify-center items-center h-[350px]">
           <div className="heading flex justify-center">
-            <h2 className=" text-xl font-bold mt-2 text-sky-800  mb-8">Featured Rooms</h2>
+            <h2 className=" text-xl font-bold mt-2 text-sky-600 border-b-2 border-sky-600 mb-8">Featured Rooms</h2>
           </div>
           <div className="flex flex-row justify-evenly items-center">
             <div className="h-[230px] w-[300px] bg-sky-800  rounded-md ">
@@ -75,7 +75,7 @@ export const Home = () => {
           </div>
         </div>
         <div className=" flex flex-row h-auto ">
-          <div class="mapouter ml-1 my-5">
+          <div class="mapouter my-5">
             <div class="gmap_canvas">
               <iframe class="gmap_iframe"
                 width="100%"
@@ -87,14 +87,14 @@ export const Home = () => {
               </iframe><a href="https://embed-googlemap.com" className='border-none'></a>
             </div>
           </div>
-          <div className="card-list flex flex-col justify-start ml-10 my-3">
+          <div className="flex flex-col justify-start ml-5 my-3">
             <ul className="card flex flex-col justify-between">
               <li><Cards /></li>
               <li></li>
             </ul>
           </div>
         </div>
-        <div className="services-section flex flex-col h-[300px] w-[1024px] bg-slate-600">
+        <div className="services-section flex flex-col h-[300px] w-[1024px] bg-slate-200">
           <div className="heading my-8 flex justify-center items-center">
             <h5 className="text-xl font-bold text-sky-600">Services</h5>
           </div>
