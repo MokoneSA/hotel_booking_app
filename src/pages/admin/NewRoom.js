@@ -28,7 +28,7 @@ export const AdminHome = () => {
     const [numberOfRooms, setNumberOfRooms] = useState('');
     const [contact, setContact] = useState('');
     const [bedType, setBedType] = useState('');
-    const [imageUpload, setImageUpload] = useState();
+    const [file, setFile] = useState();
     const [imageUrl, setImageUrl] = useState('');
 
     const imageListRef = ref(storage, "hotelImages/")
@@ -59,8 +59,8 @@ export const AdminHome = () => {
 
         // upload image to firebase storage
         const uploadImage = () => {
-            const imageRef = ref(storage, `hotelImages/${imageUpload.name + v4()}`);
-            uploadBytes(imageRef, imageUpload).then(() => {
+            const imageRef = ref(storage, `hotelImages/${file.name + v4()}`);
+            uploadBytes(imageRef, file).then(() => {
                 getDownloadURL(imageRef).then((url) => {
                 setImageUrl(url);
                 alert("Image Uploaded");
@@ -88,8 +88,8 @@ export const AdminHome = () => {
                 <h3 className="font-black text-2xl m-[30px]">Add New Room</h3>
                 <form className="flex flex-row justify-center" >
                     <div className="left-side w-[450px] flex flex-col">
-                        <img className="image" src={imageUrl} alt="" />
-                        <input className="my-0" type="file" onChange={(e) => setImageUpload(e.target.files[0])} />
+                        <img className="image" src={file} alt="" />
+                        <input className="my-0" type="file" onChange={(e) => setFile(e.target.files[0])} />
                         <label className="text-base font-medium mx-0 my-2 mr-[30px]">Hotel</label>
                         <input
                             type="text"
@@ -159,7 +159,7 @@ export const AdminHome = () => {
                             <option>2 Single Beds</option>
                             <option>Double Bed</option>
                             <option>King Bed</option>
-                            <option>QueenBed</option>
+                            <option>Queen Bed</option>
                         </select>
 
                         <button className=" font-bold rounded-md bg-sky-950 w-[100px] mx-0 my-10" onClick={handleAdd}>Send</button>

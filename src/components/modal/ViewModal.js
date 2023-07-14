@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../config/firebase'
-import { collection, getDoc, doc, updateDoc} from 'firebase/firestore';
+import { collection, getDoc, doc, updateDoc } from 'firebase/firestore';
 
 
 
@@ -26,18 +26,21 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
     // const hotelRoomRef = doc(db, "hotelRooms");
 
     const getRooms = async () => {
-        try {
-            const data = await getDoc(collection(db, "hotelRooms"));
 
+        try {
+
+            const data = await getDoc(collection(db, "hotelRooms"));
             const filteredData = data.docs.map((doc) => ({
                 ...doc.data(), id: doc.id,
             }));
+            
             setRooms(filteredData);
-
         } catch (err) {
             console.error(err);
         }
+        
     };
+
 
     // Update room  function
     const updateRoom = async (e) => {
@@ -54,13 +57,19 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
             numberOfRooms,
             roomType,
             bedType,
-            imageUrl
         }
 
-        // Add a new document in collection
-        await updateDoc(doc(db, "hotelRooms"), {
-            ...room
-        });
+        try {
+            // Add a new document in collection
+            await updateDoc(doc(db, "hotelRooms", selectedRoom.id), room);
+            console.log("Room updated")
+
+        } catch (error) {
+            console.log(selectedRoom.id)
+            // console.log(rooms)
+            console.log("Error updating room: ", error)
+        }
+
 
 
         // await updateDoc(hotelRoomRef, {
@@ -80,8 +89,8 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
                     <form className="flex flex-col items-center justify-center bg-slate-300" >
                         <div className="flex flex-row items-center justify-center m-auto">
                             <div className="left-side w-[450px] flex flex-col mx-10 my-10">
-                                <img className="image" src={imageUpload} alt="" />
-                                <input className="my-0" type="file" onChange={(e) => setImageUpload(e.target.files[0])} />
+                                <img className="image" src="{}" alt="" />
+                                <input className="my-0" type="file" onChange={(e) => setImageUrl(e.target.files)} />
                                 <label className="text-base font-medium mx-0 my-2 mr-[30px]">Hotel</label>
                                 <input
                                     type="text"
@@ -143,7 +152,7 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
                                 />
                                 <label className="text-base font-medium mx-0 my-2.5">Number of rooms</label>
                                 <input
-                                    type="text"
+                                    type="number"
                                     placeholder=" Enter contact details..."
                                     value={numberOfRooms}
                                     onChange={(e) => setNumberOfRooms(e.target.value)}

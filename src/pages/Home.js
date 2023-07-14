@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-
 // Components and pages
 import Navbar from '../components/Navbar';
 import Header from '../components/HeroSec';
@@ -8,15 +7,9 @@ import Footer from '../components/Footer';
 import Cards from '../components/cards/Cards';
 import LoginModal from '../components/modal/LoginModal';
 import RegistModal from '../components/modal/RegistModal';
-
-// Icons
-import { faPersonHiking, faPersonBiking, faCar, faVanShuttle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-// Images
-import fimage1 from '../images/home-images/Feat-room1.jpg'
-import fimage2 from '../images/home-images/Feat-room2.jpg'
-import fimage3 from '../images/home-images/Feat-room3.jpg'
+// import Contact from '../components/Contact';
+import Service from '../components/Service';
+import FeaturedRooms from '../components/FeaturedRooms';
 
 
 export const Home = () => {
@@ -55,24 +48,8 @@ export const Home = () => {
         <Header />
       </div>
       <div className="main flex flex-col justify-center items-center w-[1024px] m-auto">
-        <div className="flex flex-col justify-center items-center h-[350px]">
-          <div className="heading flex justify-center">
-            <h2 className=" text-xl font-bold mt-2 text-sky-600 border-b-2 border-sky-600 mb-8">Featured Rooms</h2>
-          </div>
-          <div className="flex flex-row justify-evenly items-center">
-            <div className="h-[230px] w-[300px] bg-sky-800  rounded-md ">
-              <img className="w-[300px] h-[200px]" src={fimage1} alt="" />
-              <p className="text-center text-white font-semibold mt-1">Family Deluxe</p>
-            </div>
-            <div className="h-[230px] w-[300px] bg-sky-800  mx-10  rounded-md ">
-              <img className="w-[300px] h-[200px]" src={fimage2} alt="" />
-              <p className="text-center text-white font-semibold mt-1">Standard Deluxe</p>
-            </div>
-            <div className="h-[230px] w-[300px] bg-sky-800  rounded-md">
-              <img className="w-[300px] h-[200px]" src={fimage3} alt="" />
-              <p className="text-center text-white font-semibold mt-1">Couples Deluxe</p>
-            </div>
-          </div>
+        <div>
+          <FeaturedRooms />
         </div>
         <div className=" flex flex-row h-auto ">
           <div class="mapouter my-5">
@@ -94,41 +71,12 @@ export const Home = () => {
             </ul>
           </div>
         </div>
-        <div className="services-section flex flex-col h-[300px] w-[1024px] bg-slate-200">
-          <div className="heading my-8 flex justify-center items-center">
-            <h5 className="text-xl font-bold text-sky-600">Services</h5>
-          </div>
-          <div className='activities flex flex-row justify-evenly items-center'>
-            <div className="flex flex-col items-center justify-center w-[200px]">
-              <span className=" text-xl font-semibold mb-2 text-sky-600 "><FontAwesomeIcon icon={faCar} /></span>
-              <h6 className=" text-lg font-semibold text-sky-600 ">Car Hire</h6>
-              <p className=" text-center ">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor.
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center  w-[200px]">
-              <span className="  text-xl font-semibold mb-2 text-sky-600"><FontAwesomeIcon icon={faPersonHiking} /></span>
-              <h6 className=" text-lg font-semibold text-sky-600 ">Free Hiking</h6>
-              <p className=" text-center ">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor.
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center w-[200px]">
-              <span className="  text-xl font-semibold mb-2 text-sky-600"><FontAwesomeIcon icon={faVanShuttle} /></span>
-              <h6 className=" text-lg font-semibold text-sky-600">Free Shuttle</h6>
-              <p className=" text-center ">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor.
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center w-[200px] ">
-              <span className=" text-xl font-semibold mb-2 text-sky-600"><FontAwesomeIcon icon={faPersonBiking} /></span>
-              <h6 className=" text-lg font-semibold text-sky-600 ">Free Biking</h6>
-              <p className=" text-center ">Lorem ipsum dolor sit amet, consectetur
-                adipiscing elit, sed do eiusmod tempor.
-              </p>
-            </div>
-          </div>
+        <div>
+          <Service />
         </div>
+        {/* <div>
+          <Contact />
+        </div> */}
       </div>
       <div>
         <Footer />

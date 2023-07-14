@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import '../../styles/card.css'; // Importing css style
 import { useState, useEffect } from 'react'; // React Hooks
 import { db } from '../../config/firebase'; // importing database from config file
@@ -41,34 +41,27 @@ export const Cards = () => {
                     <div className="image-container">
                         <img src={room.roomImage} alt='roomImage' />
                     </div>
-                    <div className="Details">
-                        <div className="card-body">
-                            <h3 className=" font-bold text-xl mt-6 mb-3 mx-0 " >{room.title}</h3>
-                        </div>
-                        <div className="card-body">
-                            <p className=" font-medium mb-5 ">{room.description}</p>
-                        </div>
-                        <div className="card-body">
-                            <p className="text-xs font-bold mt-3">Room Type: {room.roomType}</p>
-                        </div>
-                        <div className="card-body">
-                            <ul className=" flex flex-row justify-between w-40 mt-2 mb-4 ">
-                                <li className=" text-xs font-bold mt-3 "><FontAwesomeIcon icon={faBed} className=" text-lg" /> : {room.bedType}</li>
-                                <li className=" text-xs font-bold mt-3 "><FontAwesomeIcon icon={faUserGroup} className=" text-sm" /> : {room.numberOfPeople}</li>
-                            </ul>
-                        </div>
-                        <div className="card-body">
-                            <p className="text-xs font-bold mt-3">Price: R{room.price}</p>
-                        </div>
-                        
-                        <div className=" ml-20 mr-20 mt-4 flex justify-evenly ">
-                            <button className="text-sky-600 ">
-                                 View more
-                            </button>
-                            <button className=" text-sky-600">
-                                Add
-                            </button>
-                        </div>
+                    <div className="Details flex justify-center items-center">
+                        <table className=" w-[250px]" >
+                            <th className="mb-4"><h3 className="font-bold text-xl mt-2 mb-3 mx-0 " >{room.title}</h3></th>
+                            <tr>
+                                <td><p className=" font-medium mb-2 ">{room.description}</p></td>
+                            </tr>
+                            <tr>
+                            <td><p className="text-xs font-bold mb-4">Room Type: {room.roomType}</p></td>
+                            </tr>
+                            <tr>
+                            <td><FontAwesomeIcon icon={faBed} className=" text-lg" /> : {room.bedType}</td>
+                            <td><FontAwesomeIcon icon={faUserGroup} className=" text-sm" /> : {room.numberOfPeople}</td>
+                            </tr>
+                            <tr>
+                            <td><p className="text-xs font-bold my-2">Price: R{room.price}</p></td>
+                            </tr>
+                            <tr>
+                            <td><button className="text-sky-600 ">View more</button></td>
+                            <td><button className=" text-sky-600">Add</button></td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             ))}

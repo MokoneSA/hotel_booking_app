@@ -24,7 +24,7 @@ const LoginModal = ({ closeLogin }) => {
 
         try {
             await signIn(email, password)
-            navigate("/adminhome")
+            navigate("/clienthome")
         } catch (e) {
             setError(e.message)
             console.log(e.message)
