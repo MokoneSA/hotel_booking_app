@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/home.css'
-import { Navigate } from 'react-router-dom';
+import { Navigate, useHistory } from 'react-router-dom';
 
 // Components import
 import ClientNavbar from '../../components/navbar/ClientNavbar';
@@ -22,7 +22,17 @@ import { auth } from '../../config/firebase';
 export const Home = () => {
 
   // const nagivate = useNavigate();
+  const history = useHistory();
 
+  console.log('Checking ',data);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if(!user) {
+        history.push('/login');
+      }
+    })
+  })
 
   const logout = async () => {
     try {

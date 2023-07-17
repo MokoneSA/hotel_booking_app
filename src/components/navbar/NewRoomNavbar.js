@@ -8,9 +8,9 @@ import { Link } from 'react-router-dom';
 const Navbar = ({signOut}) => {
 
     return (
-        <div className="navbar bg-gray-200">
-            <div className='navContainer'>
-                <span className='logo'>HOTEL <FontAwesomeIcon icon={faBellConcierge} /> BOOKINGS</span>
+        <div className="navbar w-[1024px] h-[50px] flex items-center jusstify-center m-[auto] bg-slate-200">
+            <div className='navContainer w-[1024px] flex items-center justify-between bg-slate-200 '>
+                <span className='logo font-bold ml-4 decoration-black text-lg'>HOTEL <FontAwesomeIcon icon={faBellConcierge} /> BOOKINGS</span>
                 <nav className="navItems">
                     <Link to="/newroom">New Room</Link>
                     <Link to="/" className="logout-link" onClick={signOut}>Log out</Link>

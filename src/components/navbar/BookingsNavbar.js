@@ -10,11 +10,11 @@ import { useState } from 'react';
 const Navbar = ({signOut}) => {
 
     return (
-        <div className="navbar bg-gray-200">
-            <div className='navContainer'>
-                <span className='logo'>HOTEL <FontAwesomeIcon icon={faBellConcierge} /> BOOKINGS</span>
+        <div className="navbar bg-gray-200 w-[1024px] m-auto">
+            <div className='navContainer flex flex-row justify-between items-center h-[60px]'>
+                <span className='logo text-lg font-semibold'>HOTEL <FontAwesomeIcon icon={faBellConcierge} /> BOOKINGS</span>
                 <nav className="navItems">
-                    <Link to='/bookings'>Home</Link>
+                    <Link to='/clienthome'>Home</Link>
                     <Link to="/" className="logout-link" onClick={signOut}><FontAwesomeIcon icon={faRightFromBracket} /> Logout</Link>
                 </nav>
             </div>
