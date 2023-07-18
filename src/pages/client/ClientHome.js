@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/home.css'
-import { Navigate, useHistory } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 // Components import
 import ClientNavbar from '../../components/navbar/ClientNavbar';
@@ -9,30 +9,26 @@ import Footer from '../../components/Footer';
 import Cards from '../../components/cards/Cards';
 import Service from '../../components/Service';
 
-// Images
-import fimage1 from '../../images/home-images/Feat-room1.jpg'
-import fimage2 from '../../images/home-images/Feat-room2.jpg'
-import fimage3 from '../../images/home-images/Feat-room3.jpg'
-
 // Firebase imports
 import { signOut } from 'firebase/auth';
 import { auth } from '../../config/firebase';
+import FeaturedRooms from '../../components/FeaturedRooms';
 
 
 export const Home = () => {
 
   // const nagivate = useNavigate();
-  const history = useHistory();
+  // const history = useHistory();
 
-  console.log('Checking ',data);
+  // console.log('Checking ',data);
 
-  useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      if(!user) {
-        history.push('/login');
-      }
-    })
-  })
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(user => {
+  //     if(!user) {
+  //       history.push('/login');
+  //     }
+  //   })
+  // })
 
   const logout = async () => {
     try {
@@ -52,27 +48,11 @@ export const Home = () => {
         <Header />
       </header>
       <main className="main bg-white flex flex-col w-[1024px] m-auto ">
-        <div className="flex flex-col justify-center items-center h-[350px]">
-          <div className="heading flex justify-center">
-            <h2 className=" text-xl font-bold mt-2  mb-8" text-sky-600>Featured Rooms</h2>
-          </div>
-          <div className="flex flex-row justify-evenly items-center">
-            <div className="h-[230px] w-[300px] bg-sky-800  rounded-md ">
-              <img className="w-[300px] h-[200px]" src={fimage1} alt="" />
-              <p className="text-center text-white font-semibold mt-1">Family Deluxe</p>
-            </div>
-            <div className="h-[230px] w-[300px] bg-sky-800  mx-8  rounded-md ">
-              <img className="w-[300px] h-[200px]" src={fimage2} alt="" />
-              <p className="text-center text-white font-semibold mt-1">Standard Deluxe</p>
-            </div>
-            <div className="h-[230px] w-[300px] bg-sky-800   rounded-md">
-              <img className="w-[300px] h-[200px]" src={fimage3} alt="" />
-              <p className="text-center text-white font-semibold mt-1">Couples Deluxe</p>
-            </div>
-          </div>
+        <div className="m-auto">
+          <FeaturedRooms />
         </div>
-        <div className="flex flex-row ">
-          <div class="mapouter ml-5 my-5">
+        <div className="flex flex-row justify-between">
+          <div className="mapouter ml-5 my-5 w-[33%]">
             <div class="gmap_canvas">
               <iframe class="gmap_iframe"
                 width="100%"
@@ -84,10 +64,9 @@ export const Home = () => {
               </iframe><a href="https://embed-googlemap.com" className='border-none'></a>
             </div>
           </div>
-          <div className="card-list flex flex-col justify-start ml-5 my-3">
+          <div className="card-list flex flex-col justify-center items-center ml-5 my-3">
             <ul className="card flex flex-col justify-between">
               <li><Cards /></li>
-              <li></li>
             </ul>
           </div>
         </div>

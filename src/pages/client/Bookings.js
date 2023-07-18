@@ -1,26 +1,26 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import BookingsNavbar from '../../components/navbar/BookingsNavbar';
 import HeroSec from '../../components/HeroSec';
 import Service from '../../components/Service';
 import Footer from '../../components/Footer';
 import { CartContext } from '../../components/context/CartContext';
-import { useHistory } from 'react-router-dom';
-import {auth} from '../../config/firebase';
+// import { useHistory } from 'react-router-dom';
+// import {auth} from '../../config/firebase';
 
 const Bookings = () => {
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const { shoppingCart, dispatch, totalPrice, totalQty } = useContext(CartContext);
-  console.log('Checking ',data);
+  console.log('Checking ', shoppingCart);
 
-  useEffect(() => {
-    auth.onAuthStateChanged(user => {
-      if(!user) {
-        history.push('/login');
-      }
-    })
-  })
+  // useEffect(() => {
+  //   auth.onAuthStateChanged(user => {
+  //     if(!user) {
+  //       history.push('/login');
+  //     }
+  //   })
+  // })
 
   return (
     <div className="flex flex-col">
@@ -28,24 +28,27 @@ const Bookings = () => {
         <BookingsNavbar />
         <HeroSec />
       </header>
-      <main className="m-auto w-[1024px] h-[400px]">
-        {shoppingCart && shoppingCart.map(cart => (
-          <div key={cart.id}>
-            <div>
-              <img src={cart.imageUrl} alt="not found" />
-            </div>
-            <div>{cart.title}</div>
-            <div>{cart.description}</div>
-            <div>R {cart.price}.00</div>
-            <button>Delete</button>
-          </div>
-        ))}
+      <main className="m-auto w-[1024px] h-auto flex flex-col">
         <div className=" my-5">
           <h3 className="text-center text-xl font-bold">Your Reservation</h3>
         </div>
-        <div className="total">
-          <h5 className="text-lg font-semibold">Total amount:</h5>
-          <button>Place order</button>
+        {shoppingCart && shoppingCart.map(cart => (
+          <div className="flex flex-row justify-around border items-center mb-[20px] h-[100px]" key={cart.id}>
+            <div>
+              <img className="w-[140px]" src={cart.roomImage} alt="not found" />
+            </div>
+            <div>{cart.title}</div>
+            <div>{cart.description}</div>
+            <div>Days selected: {cart.numberOfPeople}</div>
+            <div>R {cart.price}.00</div>
+            <button className="delete-btn" onClick={() => dispatch({type: 'DELETE', id: cart.id, cart})}>Delete</button>
+          </div>
+        ))}
+
+        <div className="total my-10">
+          <span className="font-medium m-2">Quantity: {totalQty}</span><br />
+          <span className="font-medium m-2">Total amount: R {totalPrice}.00</span><br />
+          <button className="border p-1">Place order</button>
         </div>
         <div>
           <Service />
