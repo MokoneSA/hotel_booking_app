@@ -1,12 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../../components/modal/stryle.css'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../../config/firebase';
-import { collection, getDocs } from 'firebase/firestore'
-// import { signInWithEmailAndPassword } from 'firebase/auth';
-// import {auth} from '../../config/firebase'; 
+import { collection, getDocs, where, query } from 'firebase/firestore'
 import { useUserAuth } from '../../components/context/UserAuthContext';
+import { auth } from '../../config/firebase';
 
 
 const LoginModal = ({ closeLogin }) => {
@@ -15,7 +14,7 @@ const LoginModal = ({ closeLogin }) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [userRole, setUserRole] = useState("")
-    const { logIn } = useUserAuth();
+    const { logIn, user } = useUserAuth();
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -26,35 +25,75 @@ const LoginModal = ({ closeLogin }) => {
         try {
             await logIn(email, password);
 
-            const userRef = collection(db, "users");
-            const role = await getDocs(userRef);
-            const filteredData = role.docs.map((doc) => doc.data().role);
+            const userRef = query(collection(db, "users"), where("userID", "==", auth.currentUser.uid));
+            const querySnapshot = await getDocs(userRef);
 
-            setUserRole(filteredData);
+            querySnapshot.forEach((doc) => {
+                setUserRole(doc.data().userID);
+            })
 
-            if (userRole.includes('admin')) {
-                navigate('/adminhome')
+            if (auth.currentUser.uid === userRole) {
+                navigate("/adminhome")
+                console.log("working admin user")
             } else {
-                navigate('/clienthome')
+                navigate("/clienthome")
+                console.log("client user")
             }
 
-            console.log("Users data", userRole);
-
-
         } catch (err) {
-            setError(err.message);
+            // setError()
+            console.log(err.message);
         }
 
-
-        // signInWithEmailAndPassword(auth, email, password).then(() => {
-        //     alert("Signed in successfully");
-        //     navigate("/clienthome");
-
-        // }).catch((err) => {
-        //     setError(err)
-        //     alert(error)
-        // })
+        console.log(userRole);
     }
+
+    // useEffect(() => {
+
+    //     // async function fetchUserId() {
+    //     //     const userRef = collection(db, "users")
+    //     //     const q = query(userRef, where("userID", "==", auth.currentUser.uid));
+    //     //     const querySnapshot = await getDocs(q);
+    //     //     if (querySnapshot.empty) {
+    //     //         console.log("No matching documents")
+    //     //     } else {
+    //     //         querySnapshot.forEach((doc) => {
+    //     //             // console.log("checking ", doc.data().userID);
+    //     //             setUserRole(doc.data().userID)
+    //     //         })
+    //     //     }
+    //     // }
+    //     // console.log(userRole)
+
+    //     // if (fetchUserId) {
+    //     //     if (userRole) { console.log(userRole)
+    //     //         navigate("/adminhome")
+    //     //     } else {
+    //     //         navigate("/clienthome")
+    //     //     }
+    //     // } else {
+    //     //     navigate("/")
+    //     //     console.log("user does not exist")
+    //     // }
+
+    //     const fetchUserId = async () => {
+    //         try {
+    //             const userRef = query(collection(db, "users"), where("userID", "==", auth.currentUser.uid));
+    //             const querySnapshot = await getDocs(userRef);
+
+    //             querySnapshot.forEach((doc) => {
+    //                 // console.log("checking ", doc.data().userID);
+    //                 setUserRole(doc.data().userID)
+    //             })
+    //         } catch (err) {
+    //             console.log("Error fetching user data", err)
+    //         }
+    //     };
+
+    //     fetchUserId()
+
+    // }, [ ]);
+
 
 
     return (
@@ -64,7 +103,7 @@ const LoginModal = ({ closeLogin }) => {
                 <h1 className=" text-center font-black text-2xl mb-10">Login</h1>
                 <form className=" flex flex-col items-center justify-center w-80 " onSubmit={handleLogin}>
                     <label
-                        for="email"
+                        htmlFor="email"
                         className="w-72 font-medium"
                     >Email:</label>
                     <input
@@ -76,7 +115,7 @@ const LoginModal = ({ closeLogin }) => {
                     />
                     <label
                         className="w-72 font-medium"
-                        for="password"
+                        htmlFor="password"
                     >Password:</label>
                     <input
                         className="mb-5 h-8 w-72"

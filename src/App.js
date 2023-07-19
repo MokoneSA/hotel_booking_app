@@ -18,6 +18,7 @@ function App() {
       <CartContextProvider>
         <Routes>
           <Route path="/" element={<Home />} />
+          
           <Route path="/login" element={<LoginModal />} />
           <Route path="/register" element={<RegistModal />} />
 

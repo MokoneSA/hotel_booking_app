@@ -17,19 +17,6 @@ import FeaturedRooms from '../../components/FeaturedRooms';
 
 export const Home = () => {
 
-  // const nagivate = useNavigate();
-  // const history = useHistory();
-
-  // console.log('Checking ',data);
-
-  // useEffect(() => {
-  //   auth.onAuthStateChanged(user => {
-  //     if(!user) {
-  //       history.push('/login');
-  //     }
-  //   })
-  // })
-
   const logout = async () => {
     try {
       await signOut(auth);

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import '../../components/modal/stryle.css'
-// import { createUserWithEmailAndPassword } from 'firebase/auth';
-// import { auth } from '../../config/firebase';
-import { UserAuth } from '../../components/context/AuthContext'
+import { useUserAuth } from '../../components/context/UserAuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 
 
@@ -12,7 +10,7 @@ export const Register = ({ closeRegister }) => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const { createUser } = UserAuth();
+    const { signUp } = useUserAuth();
     const navigate = useNavigate();
 
 
@@ -22,16 +20,14 @@ export const Register = ({ closeRegister }) => {
         setError('');
 
         try {
-            await createUser(email, password);
+            await signUp(email, password);
             navigate("/login");
             alert("Signed up successfully");
         } catch (e) {
             setError(e.message);
             console.log(e.message);
         } 
-    }
-
-    
+    }   
 
 
     return (

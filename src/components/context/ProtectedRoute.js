@@ -1,19 +1,20 @@
-import React from 'react'
-import { Navigate, useLocation } from 'react-router-dom'
-import { UserAuth } from './AuthContext'
+import React, { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useUserAuth } from './UserAuthContext';
 
-const ProtectedRoute = ({children}) => {
+const ProtectedRoute = ({ children }) => {
 
-    const location = useLocation();
+  const navigate = useNavigate()
+  const location = useLocation();
 
-    const { user } = UserAuth();
+  const { user } = useUserAuth();
 
-    if (!user) {
-      return <Navigate to='/' />
-    }
-    
-    console.log(location)
-    return children
+  if (!user) {
+    return navigate("/")
+  }
+ 
+  console.log(user)
+  return children
 }
 
-export default ProtectedRoute
+export default ProtectedRoute;
