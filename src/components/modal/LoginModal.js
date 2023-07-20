@@ -13,87 +13,49 @@ const LoginModal = ({ closeLogin }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
-    const [userRole, setUserRole] = useState("")
-    const { logIn, user } = useUserAuth();
+    const { logIn } = useUserAuth();
     const navigate = useNavigate();
+
 
     const handleLogin = async (e) => {
         e.preventDefault()
 
         setError("");
 
+
         try {
-            await logIn(email, password);
+            let uid = await logIn(email, password);
+
+            let userRole = "empty";
 
             const userRef = query(collection(db, "users"), where("userID", "==", auth.currentUser.uid));
             const querySnapshot = await getDocs(userRef);
 
             querySnapshot.forEach((doc) => {
-                setUserRole(doc.data().userID);
+                userRole = (doc.data().userID)
             })
 
-            if (auth.currentUser.uid === userRole) {
-                navigate("/adminhome")
-                console.log("working admin user")
+            console.log({ uid: auth.currentUser.uid, userRole })
+
+            if (uid.user && uid.user.uid) {
+                if (auth.currentUser.uid != null) {
+                    if (auth.currentUser.uid === userRole) {
+                        navigate("/adminhome")
+                        console.log("working admin user")
+                    } else {
+                        navigate("/clienthome")
+                        console.log("client user")
+                    }
+                }
             } else {
-                navigate("/clienthome")
-                console.log("client user")
+                console.log("User doesn't exist")
             }
 
         } catch (err) {
             // setError()
             console.log(err.message);
         }
-
-        console.log(userRole);
     }
-
-    // useEffect(() => {
-
-    //     // async function fetchUserId() {
-    //     //     const userRef = collection(db, "users")
-    //     //     const q = query(userRef, where("userID", "==", auth.currentUser.uid));
-    //     //     const querySnapshot = await getDocs(q);
-    //     //     if (querySnapshot.empty) {
-    //     //         console.log("No matching documents")
-    //     //     } else {
-    //     //         querySnapshot.forEach((doc) => {
-    //     //             // console.log("checking ", doc.data().userID);
-    //     //             setUserRole(doc.data().userID)
-    //     //         })
-    //     //     }
-    //     // }
-    //     // console.log(userRole)
-
-    //     // if (fetchUserId) {
-    //     //     if (userRole) { console.log(userRole)
-    //     //         navigate("/adminhome")
-    //     //     } else {
-    //     //         navigate("/clienthome")
-    //     //     }
-    //     // } else {
-    //     //     navigate("/")
-    //     //     console.log("user does not exist")
-    //     // }
-
-    //     const fetchUserId = async () => {
-    //         try {
-    //             const userRef = query(collection(db, "users"), where("userID", "==", auth.currentUser.uid));
-    //             const querySnapshot = await getDocs(userRef);
-
-    //             querySnapshot.forEach((doc) => {
-    //                 // console.log("checking ", doc.data().userID);
-    //                 setUserRole(doc.data().userID)
-    //             })
-    //         } catch (err) {
-    //             console.log("Error fetching user data", err)
-    //         }
-    //     };
-
-    //     fetchUserId()
-
-    // }, [ ]);
-
 
 
     return (

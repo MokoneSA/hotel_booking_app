@@ -10,16 +10,18 @@ import Cards from '../../components/cards/Cards';
 import Service from '../../components/Service';
 
 // Firebase imports
-import { signOut } from 'firebase/auth';
+import { useUserAuth } from '../../components/context/UserAuthContext'
 import { auth } from '../../config/firebase';
 import FeaturedRooms from '../../components/FeaturedRooms';
 
 
 export const Home = () => {
 
-  const logout = async () => {
+  const { logOut } = useUserAuth();
+
+  const signOut = async () => {
     try {
-      await signOut(auth);
+      await logOut(auth);
       alert('Signed Out');
       Navigate("/");
     } catch (err) {
@@ -31,7 +33,7 @@ export const Home = () => {
   return (
     <div className='home-container bg-zinc-400 block h-auto'>
       <header className="navbarsection">
-        <ClientNavbar signOut={logout} />
+        <ClientNavbar signOut={signOut} />
         <Header />
       </header>
       <main className="main bg-white flex flex-col w-[1024px] m-auto ">

@@ -10,6 +10,7 @@ import RegistModal from '../components/modal/RegistModal';
 // import Contact from '../components/Contact';
 import Service from '../components/Service';
 import FeaturedRooms from '../components/FeaturedRooms';
+import Search from '../components/Search';
 
 
 export const Home = () => {
@@ -48,6 +49,9 @@ export const Home = () => {
         <Header />
       </div>
       <div className="main flex flex-col justify-center items-center w-[1024px] m-auto">
+        <div className=" bg-gray-500 w-[1024px] h-[60px] flex justify-center items-center">
+          <Search />
+        </div>
         <div>
           <FeaturedRooms />
         </div>
