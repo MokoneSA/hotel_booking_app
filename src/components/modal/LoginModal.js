@@ -22,7 +22,6 @@ const LoginModal = ({ closeLogin }) => {
 
         setError("");
 
-
         try {
             let uid = await logIn(email, password);
 
@@ -61,7 +60,7 @@ const LoginModal = ({ closeLogin }) => {
     return (
         <div className="w-screen h-screen bg-sky-950 fixed flex items-center justify-center">
             <div className="flex flex-col items-center justify-center rounded bg-white w-[500px] h-[500px]">
-                <button className="flex justify-end" onClick={() => { closeLogin() }}> X </button>
+                <button className="flex justify-end" onClick={() => {closeLogin()}}> X </button>
                 <h1 className=" text-center font-black text-2xl mb-10">Login</h1>
                 <form className=" flex flex-col items-center justify-center w-80 " onSubmit={handleLogin}>
                     <label

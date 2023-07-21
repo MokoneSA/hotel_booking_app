@@ -5,10 +5,14 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { faBed, faCalendarDays, faPerson } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../config/firebase';
 
 
 const Search = () => {
 
+    const [searchInput,setSearchInput] = useState('');
+    const [searchResults, setSearchResults] = useState('');
     const [openDate, setOpenDate] = useState(false);
     const [date, setDate] = useState([
         {
@@ -19,11 +23,20 @@ const Search = () => {
     ]);
     const [openOptions, setOpenOptions] = useState(false)
 
+    const fetchData = async () => {
+        const data = await getDocs(query(collection(db, "hotelRooms")
+            , where("hotel", "==", searchInput)));
+        setSearchResults(data.docs.map(doc => ({ ...doc.data(), id: doc.id })));
+        console.log("Search data", searchInput )
+    };
+
+    
+
     return (
         <div className="search-section rounded w-[900px] h-[40px] flex items-center justify-between border p-[10px] bg-white">
             <div className="m-3 flex flex-row items-center">
                 <FontAwesomeIcon icon={faBed} className="headerIcon m-1 text-sky-800 " />
-                <input type="text" placeholder="Where are you going" className="SearchInput m-1 outline-none" />
+                <input type="text" placeholder="Where are you going" onChange={(e) => setSearchInput(e.target.value)} className="SearchInput m-1 outline-none" />
             </div>
             <div className="m-3 flex flex-row items-center ml-[-30px]">
                 <FontAwesomeIcon icon={faCalendarDays} className="headerIcon m-1 text-sky-800" />
@@ -50,7 +63,7 @@ const Search = () => {
                 }
             </div>
             <div>
-                <button className="bg-sky-800 text-white p-1 mr-[-7px] rounded">Search</button>
+                <button className="bg-sky-800 text-white p-1 mr-[-7px] rounded" onClick={fetchData}>Search</button>
             </div>
 
         </div>

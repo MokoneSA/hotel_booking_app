@@ -7,10 +7,11 @@ import Footer from '../components/Footer';
 import Cards from '../components/cards/Cards';
 import LoginModal from '../components/modal/LoginModal';
 import RegistModal from '../components/modal/RegistModal';
+
 // import Contact from '../components/Contact';
 import Service from '../components/Service';
 import FeaturedRooms from '../components/FeaturedRooms';
-import Search from '../components/Search';
+// import Search from '../components/Search';
 
 
 export const Home = () => {
@@ -39,7 +40,7 @@ export const Home = () => {
   }
 
   return (
-    <div className='home-container'>
+    <div>
       <div className="navbarsection">
         {openLoginModal && <LoginModal closeLogin={closeLogin} />}
         {openRegistModal && <RegistModal closeRegister={closeRegister} />}
@@ -49,9 +50,9 @@ export const Home = () => {
         <Header />
       </div>
       <div className="main flex flex-col justify-center items-center w-[1024px] m-auto">
-        <div className=" bg-gray-500 w-[1024px] h-[60px] flex justify-center items-center">
+        {/* <div className=" bg-gray-500 w-[1024px] h-[60px] flex justify-center items-center">
           <Search />
-        </div>
+        </div> */}
         <div>
           <FeaturedRooms />
         </div>
@@ -69,9 +70,8 @@ export const Home = () => {
             </div>
           </div>
           <div className="flex flex-col justify-start ml-5 my-3">
-            <ul className="card flex flex-col justify-between">
+            <ul className="flex flex-col justify-between">
               <li><Cards /></li>
-              <li></li>
             </ul>
           </div>
         </div>
