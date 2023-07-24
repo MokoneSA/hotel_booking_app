@@ -85,10 +85,10 @@ export const AdminHome = () => {
             <Navbar />
             <Header />
             <div className="admin-main-section w-[1024px] h-full flex flex-col items-center bg-[grey] m-auto">
-                <h3 className="font-black text-2xl m-[30px]">Add New Room</h3>
+                <h3 className="text-white text-2xl m-[30px]">Add New Room</h3>
                 <form className="flex flex-row justify-center" >
                     <div className="left-side w-[450px] flex flex-col">
-                        <img className="image" src={file} alt="" />
+                        <img className="image" src={imageUrl} alt="" />
                         <input className="my-0" type="file" onChange={(e) => setFile(e.target.files[0])} />
                         <label className="text-base font-medium mx-0 my-2 mr-[30px]">Hotel</label>
                         <input
@@ -144,7 +144,7 @@ export const AdminHome = () => {
                         <label className="text-base font-medium mx-0 my-2.5">Number of rooms</label>
                         <input
                             type="number"
-                            placeholder=" Enter contact details..."
+                            placeholder=" Enter number of rooms..."
                             onChange={(e) => setNumberOfRooms(e.target.value)}
                             required
                         />
@@ -162,7 +162,7 @@ export const AdminHome = () => {
                             <option>Queen Bed</option>
                         </select>
 
-                        <button className=" font-bold rounded-md bg-sky-950 w-[100px] mx-0 my-10" onClick={handleAdd}>Send</button>
+                        <button className=" text-white font-bold rounded-md bg-sky-950 w-[100px] mx-0 my-10" onClick={handleAdd}>Send</button>
                     </div>
                 </form>
             </div>

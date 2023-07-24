@@ -43,7 +43,7 @@ export const Footer = () => {
                         <a href='#'><div><p>Security</p></div></a>
                     </div>
                 </div>
-                <div className=" bg-black h-[5px] w-[1024px] "></div>
+                <div className=" bg-sky-950 h-[5px] w-[1024px] "></div>
             </div>
         </footer>
     )

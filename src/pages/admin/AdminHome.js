@@ -10,6 +10,7 @@ import ViewModal from '../../components/modal/ViewModal';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../config/firebase';
 import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore';
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 
 const ViewRooms = () => {
@@ -17,6 +18,8 @@ const ViewRooms = () => {
     const [rooms, setRooms] = useState();
     const [selectedRoom, setSelectedRoom] = useState();
     const [openViewModal, setViewModal] = useState(false)
+
+    const storage = getStorage();
 
     const closeEdit = () => {
         setViewModal(false);
@@ -34,7 +37,7 @@ const ViewRooms = () => {
     // handles getting data from firestore
     const getRooms = async () => {
         const querySnapshot = await getDocs(collection(db, "hotelRooms"));
-        const rooms = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
+        const rooms = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
         setRooms(rooms);
     }
 
@@ -44,13 +47,23 @@ const ViewRooms = () => {
         const [room] = rooms.filter(room => room.id === id);
         setSelectedRoom(room);
         setViewModal(true);
-      };
+    };
 
 
     // handles deleting a room
     const handleDelete = async (id) => {
-        const hotelRooms = doc(db, "hotelRooms", id);
-        await deleteDoc(hotelRooms);
+
+        try {
+            const hotelRooms = doc(db, "hotelRooms", id);
+            await deleteDoc(hotelRooms);
+
+            const desertRef = ref(storage, 'hotelImages');
+            deleteObject(desertRef).then(() => {
+                console.log("File deleted Succefully")
+            })
+        } catch (err) {
+            console.log("An error occured")
+        };
     }
 
     useEffect(() => {
@@ -96,7 +109,7 @@ const ViewRooms = () => {
                                         <td className="border">{room.roomType} </td>
                                         <td className="text-right">
                                             <button
-                                                onClick={() => {handleEdit(room.id)}}
+                                                onClick={() => { handleEdit(room.id) }}
                                                 className="button muted-button mr-2"
                                             >Edit</button>
                                         </td>

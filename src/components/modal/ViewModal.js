@@ -17,6 +17,7 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
     const [numberOfRooms, setNumberOfRooms] = useState(selectedRoom.numberOfRooms);
     const [roomType, setRoomType] = useState(selectedRoom.roomType);
     const [bedType, setBedType] = useState(selectedRoom.bedType);
+    const [roomImage, setRoomImage] = useState(selectedRoom.roomImage)
     const [imageUrl, setImageUrl] = useState(selectedRoom.imageUrl);
     // const [] = useState(selectedRoom.);
 
@@ -57,10 +58,11 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
             numberOfRooms,
             roomType,
             bedType,
+            roomImage
         }
 
         try {
-            // Add a new document in collection
+            // Update room in collection
             await updateDoc(doc(db, "hotelRooms", selectedRoom.id), room);
             console.log("Room updated")
 
@@ -84,13 +86,13 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
     return (
         <div className="w-screen h-screen bg-sky-950 fixed flex items-center justify-center">
             <div className="flex flex-col items-center justify-center">
-                <h3 className="font-black text-2xl m-[30px]">Add New Room</h3>
+                <h3 className="text-2xl m-[30px] text-white ">Add New Room</h3>
                 <div>
                     <form className="flex flex-col items-center justify-center bg-slate-300" >
                         <div className="flex flex-row items-center justify-center m-auto">
                             <div className="left-side w-[450px] flex flex-col mx-10 my-10">
-                                <img className="image" src="{}" alt="" />
-                                <input className="my-0" type="file" onChange={(e) => setImageUrl(e.target.files)} />
+                                <img className="image" src={roomImage} alt="" />
+                                <input className="my-0" type="file" onChange={(e) => setRoomImage(e.target.files)} />
                                 <label className="text-base font-medium mx-0 my-2 mr-[30px]">Hotel</label>
                                 <input
                                     type="text"
@@ -168,15 +170,16 @@ const ViewModal = ({ closeEdit, selectedRoom }) => {
                                 <label className="text-base font-medium mx-0 my-2.5">Bed type:</label>
                                 <select onChange={(e) => setBedType(e.target.value)} value={bedType} className="w-[360px] h-[30px]">
                                     <option>Double Bed</option>
-                                    <option>2 Single Beds</option>
-                                    <option>1 Extra-large Double Bed</option>
+                                    <option>2 Beds</option>
+                                    <option>King Bed</option>
+                                    <option>Queen Bed</option>
                                 </select>
 
                             </div>
                         </div>
                         <div className="flex flex-row justify-evenly items-start w-[450px] ">
-                            <button className=" font-bold rounded-md bg-sky-950 w-[100px] mx-0 my-10" onClick={updateRoom}>Update</button>
-                            <button className=" font-bold rounded-md bg-sky-950 w-[100px] mx-0 my-10" onClick={closeEdit}>Close</button>
+                            <button className=" font-bold rounded-md bg-sky-950 w-[100px] text-white mx-0 my-10" onClick={updateRoom}>Update</button>
+                            <button className=" font-bold rounded-md bg-sky-950 w-[100px] text-white mx-0 my-10" onClick={closeEdit}>Close</button>
                         </div>
                     </form>
                 </div>

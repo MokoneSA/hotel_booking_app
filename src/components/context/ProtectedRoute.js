@@ -12,8 +12,7 @@ const ProtectedRoute = ({ children }) => {
   if (!user) {
     return navigate("/login")
   }
- 
-  console.log(user)
+
   return children
 }
 

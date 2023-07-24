@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-import '../../components/modal/stryle.css'
+import React from 'react'
+import '../../components/modal/stryle.css';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../../config/firebase';
@@ -58,9 +58,12 @@ const LoginModal = ({ closeLogin }) => {
 
 
     return (
-        <div className="w-screen h-screen bg-sky-950 fixed flex items-center justify-center">
+        <div className="w-screen h-screen bg-sky-600 fixed flex flex-col items-center justify-center">
             <div className="flex flex-col items-center justify-center rounded bg-white w-[500px] h-[500px]">
-                <button className="flex justify-end" onClick={() => {closeLogin()}}> X </button>
+                <div className="w-full bg-sky-400">
+                <button className="fixed top-1 bg-stone-700 p-3 rounded-xl text-sky-200 right-2" onClick={() => {closeLogin()}}> X </button>
+                </div>
+                
                 <h1 className=" text-center font-black text-2xl mb-10">Login</h1>
                 <form className=" flex flex-col items-center justify-center w-80 " onSubmit={handleLogin}>
                     <label

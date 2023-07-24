@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './components/context/ProtectedRoute';
 import { CartContextProvider } from './components/context/CartContext';
 import { UserAuthContextProvider } from './components/context/UserAuthContext';
+import ViewRoomDetails from './pages/client/ViewRoomDetails';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           {/* Protected Routes */}
           <Route path='/clienthome' element={<ProtectedRoute><ClientHome /></ProtectedRoute>} />
           <Route path='/bookings' element={<ProtectedRoute><Bookings /></ProtectedRoute>} />
+          <Route path='/viewroomdetails' element={<ProtectedRoute><ViewRoomDetails /></ProtectedRoute>} />
           <Route path="/adminhome" element={<ProtectedRoute><AdminHome /></ProtectedRoute>} />
           <Route path='/newroom' element={<ProtectedRoute><NewRoom /></ProtectedRoute>} />
 
