@@ -7,7 +7,6 @@ import { faBed, faCalendarDays, faPerson } from "@fortawesome/free-solid-svg-ico
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { CartContext } from '../components/context/CartContext';
 
 // Components and pages
 import Navbar from '../components/Navbar';
@@ -80,27 +79,6 @@ export const Home = () => {
     }
 
   };
-
-
-  // Handles filter functionality
-  // const handleFilteredData = async () => {
-  //   try {
-  //     const queryData = query(collection(db, 'hotelRooms'),
-  //       where('price', '<=', parseInt(amountEntered)));
-  //     const querySnapshot = await getDocs(queryData);
-  //     let items = [];
-  //     querySnapshot.forEach((doc) => {
-  //       console.log(doc.data());
-  //       items.push(doc.data());
-  //     });
-  //     setData(items);
-  //     setIsFiltered(true);
-  //     console.log("View filtered data: ", items);
-  //   } catch (error) {
-  //     console.log("Failed to fetch filtered rooms: ", error);
-  //   }
-  // };
-
 
   // Opens the login modal
   const login = () => {

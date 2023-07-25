@@ -13,6 +13,8 @@ const Navbar = ({signOut}) => {
                 <span className='logo font-bold ml-4 decoration-black text-lg'>HOTEL <FontAwesomeIcon icon={faBellConcierge} /> BOOKINGS</span>
                 <nav className="navItems">
                     <Link to="/newroom">New Room</Link>
+                    <Link to="/uploadgallery">Bookings</Link>
+                    <Link to="/uploadgallery">Gallery</Link>
                     <Link to="/" className="logout-link" onClick={signOut}>Log out</Link>
                 </nav>
             </div>
